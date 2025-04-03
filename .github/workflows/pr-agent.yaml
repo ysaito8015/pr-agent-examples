@@ -19,7 +19,7 @@ jobs:
         id: pr-agent
         uses: Codium-ai/pr-agent@v0.28
         env:
-          OPENAI_KEY: ${{ secrets.CI_OPENAI_KEY }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Set Label on PR with Migraion files
@@ -33,5 +33,8 @@ jobs:
           PR_REVIEWER.EXTRA_INSTRUCTIONS: |
             YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES.
             - Persons
-            IF YOU FIND ANY SQL QUERIES THAT SET THE `CreatedAt` COLUMN NOT TO THE CURRENT DATETIME, YOU HAVE TO ALERT THEM.
-            Then, write the result of your check in Japanese in large font in 32 pt.
+            IF YOU FIND ANY SQL QUERIES THAT SET THE `CreatedAt` COLUMN NOT TO THE FUTURE DATETIME, YOU HAVE TO ALERT THEM.
+            YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES AND ESPECIALY `CreatedAt` COLUMN.
+            DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES.
+            YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.
+            日本語で結果をまとめます
