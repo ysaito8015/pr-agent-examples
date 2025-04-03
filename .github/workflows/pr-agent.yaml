@@ -19,8 +19,8 @@ jobs:
         id: pr-agent
         uses: Codium-ai/pr-agent@v0.28
         env:
-          OPENAI_KEY: ${{ secrets.CI_OPENAI_KEY }}
-          GITHUB_TOKEN: ${{ secrets.CI_GITHUB_TOKEN }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Set Label on PR with Migraion files
           CUSTOM_LABELS: |
