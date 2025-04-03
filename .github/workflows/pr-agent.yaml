@@ -19,9 +19,8 @@ jobs:
         id: pr-agent
         uses: Codium-ai/pr-agent@v0.28
         env:
-          GEMINI_TOKEN: ${{ secrets.GEMINI_TOKEN }}
+          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MODEL: "gemini/gemini-2.0-flash"
 
           # Set Label on PR with Migraion files
           CUSTOM_LABELS: |
