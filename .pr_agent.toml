@@ -1,5 +1,6 @@
 [config]
-model = "o3-mini"
+model = "gpt-4o-mini"
+#model = "o3-mini"
 #model = "gemini/gemini-2.0-flash"
 response_language = "ja-JP"
 
