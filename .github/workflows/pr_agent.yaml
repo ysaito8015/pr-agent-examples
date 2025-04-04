@@ -29,6 +29,6 @@ jobs:
         run: |
           echo "Running pr-agent with custom prompt..."
           pip install pr-agent
-          python3 ./pr-agent.py
+          python3 pr-agent.py
 
 
