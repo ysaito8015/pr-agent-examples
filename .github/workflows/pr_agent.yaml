@@ -26,7 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Set Custom Prompt to checking Migration files
-          PR_QUESTIONS: |
+          pr_custom_prompt.prompt: |
             YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.
             YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES.
             - Persons
