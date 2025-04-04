@@ -13,6 +13,9 @@ extra_instructions = "answer in Japanese"
 [pr_code_suggestions]
 extra_instructions = "answer in Japanese"
 
+[pr_ask]
+extra_instructions = "answer in Japanese"
+
 [pr_add_docs]
 extra_instructions = "answer in Japanese"
 
