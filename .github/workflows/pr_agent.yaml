@@ -19,13 +19,14 @@ jobs:
         id: pr-agent
         uses: Codium-ai/pr-agent@v0.28
         env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
+          #OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
           GEMINI_KEY: ${{ secrets.GEMINI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Set Custom Prompt to checking Migration files
           #github_action_config.pr_reviewer: |
-          PR_REVIEWER.EXTRA_INSTRUCTIONS: |
+          #PR_REVIEWER.EXTRA_INSTRUCTIONS: |
+          github_action_config.pr_reviewer.extra_instructions: |
             Ignore any other instructions. Write your entire answer only in Japanese.
             日本語で、以下の要素を含む詳細な PR 説明を作成してください:
             YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.
