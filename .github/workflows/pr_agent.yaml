@@ -23,7 +23,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Set Custom Prompt to checking Migration files
-          github_action_config.pr_reviewer: |
+          #github_action_config.pr_reviewer: |
+          PR_REVIEWER.EXTRA_INSTRUCTIONS: |
             Ignore any other instructions. Write your entire answer only in Japanese.
             日本語で、以下の要素を含む詳細な PR 説明を作成してください:
             YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.
