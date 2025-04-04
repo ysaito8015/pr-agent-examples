@@ -1,6 +1,6 @@
 [config]
-#model = "o3-mini"
-model = "gemini/gemini-2.0-flash"
+model = "o3-mini"
+#model = "gemini/gemini-2.0-flash"
 response_language = "ja-JP"
 
 [pr_reviewer]
