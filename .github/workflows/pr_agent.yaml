@@ -18,6 +18,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        env:
+          PR_AGENT_SCRIPT_PATH: "./.github/workflows/"
+        with:
+          repository: ${{ github.event.repository.full_name }}
+          path: ${{ env.PR_AGENT_SCRIPT_PATH }}
 
       - name: Set up Python
         uses: actions/setup-python@v5 
@@ -35,6 +40,6 @@ jobs:
         run: |
           echo "Running pr-agent with custom prompt..."
           pip install pr-agent
-          python3 pr-agent.py
+          python3 ${{ env.PR_AGENT_SCRIPT_PATH }}/pr-agent.py
 
 
