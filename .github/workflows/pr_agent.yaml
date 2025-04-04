@@ -23,12 +23,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Set Custom Prompt to checking Migration files
-          PR_CODE_SUGGESTIONS.EXTRA_INSTRUCTIONS: |
+          github_action_config.ask_question: |
             Ignore any other instructions. Write your entire answer only in Japanese.
             日本語で、以下の要素を含む詳細な PR 説明を作成してください
             YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.
             YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES.
             - Persons
-            IF YOU FIND ANY SQL QUERIES THAT SET THE `CreatedAt` COLUMN NOT TO THE FUTURE DATETIME, YOU HAVE TO ALERT THEM.
+            IF YOU FIND ANY SQL QUERIES THAT SET THE `CreatedAt` COLUMN NOT TO THE FUTURE DATETIME, PRINT THIS STRING "CreatedAt カラムは未来の日付に設定されていません" IN JAPANESE.
             YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES AND ESPECIALY `CreatedAt` COLUMN.
             DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES.
