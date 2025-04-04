@@ -15,20 +15,20 @@ jobs:
   pr_agent_job:
     name: Run pr-agent docker image on PR with migration files
     runs-on: ubuntu-latest
+    container:
+      image: python:3.13.0
     steps:
-      - name: check url
-        run: echo "${{ github.event.pull_request.html_url }}"
-      - name: pr-agent run with docker image
-        id: pr-agent
-        uses: addnab/docker-run-action@v3
-        with:
-          image: codiumai/pr-agent:latest
-          options: |
-            -e OPENAI.KEY=${{ secrets.OPENAI_API_KEY }}
-            -e GITHUB.USER_TOKEN=${{ secrets.GITHUB_TOKEN }}
-            -e PR_URL=${{ github.event.pull_request.html_url }}
-          # Set Custom Prompt to checking Migration files
-          run: |
-            --pr_url ${PR_URL} ask "YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.  YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES.  - Persons IF YOU FIND ANY SQL QUERIES THAT SET THE 'CreatedAt' COLUMN NOT TO MEET THE FUTURE DATETIME, PRINT THIS Tex code $\color{red}{\Huge{\textsf{CreatedAt カラムが未来の日付に設定されていません}}}$.  YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES AND ESPECIALY 'CreatedAt' COLUMN.  DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES."
+      - name: run pr-agent with script
+        id: pr-agent-python
+        env:
+          OPENAI.KEY=${{ secrets.OPENAI_API_KEY }}
+          GITHUB.USER_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          PR_URL=${{ github.event.pull_request.html_url }}
+          COMMAND="/ask \"YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE.  YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES.  - Persons IF YOU FIND ANY SQL QUERIES THAT SET THE 'CreatedAt' COLUMN NOT TO MEET THE FUTURE DATETIME, PRINT THIS Tex code $\color{red}{\Huge{\textsf{CreatedAt カラムが未来の日付に設定されていません}}}$.  YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES AND ESPECIALY 'CreatedAt' COLUMN.  DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES.\""
+        # Set Custom Prompt to checking Migration files
+        run: |
+          echo "Running pr-agent with custom prompt..."
+          pip install pr-agent
+          python3 ./pr-agent.py
 
 
