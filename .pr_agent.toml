@@ -1,3 +1,10 @@
+[config]
+model = "o3-mini"
+fallback_models = [
+  "gpt-4o-2024-11-20",
+]
+response_language = "ja-JP"
+
 [pr_reviewer]
 extra_instructions = "answer in Japanese"
 
