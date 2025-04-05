@@ -7,7 +7,7 @@ def main():
     # Setting the configurations
     provider = "github" # github/gitlab/bitbucket/azure_devops
     user_token = os.getenv("GITHUB_TOKEN")
-    openai_key = os.getenv("OPENAI_API_KEY")
+    openai_key = os.getenv("OPENAI_KEY")
     pr_url = os.getenv("PR_URL")
     command = os.getenv("COMMAND")
     get_settings().set("CONFIG.git_provider", provider)
