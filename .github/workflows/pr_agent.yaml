@@ -35,8 +35,8 @@ jobs:
  \"YOU HAVE TO WRITE RESULT IN JAPANESE. \
 YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES. \
 - Persons \
-If you find any SQL queries that did not set the 'CreatedAt' column to a future datetime beyond the current datetime, then PRINT THIS 'CreatedAt が未来の日付に設定されていません' with h1 tag. \
-Else, if you find any SQL queries that set the 'CreatedAt' column to a future datetime beyond the current one, PRINT THIS  'PASS: 日付のチェック'. \
+If you find any SQL queries that did not set the 'CreatedAt' column to a future timestamp beyond the current timestamp, then PRINT THIS 'CreatedAt が未来の日付に設定されていません' with h1 tag. \
+If you find any SQL queries that set the 'CreatedAt' column to a future timestamp beyond the current one,then PRINT THIS 'PASS: 日付のチェック'. \
 YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES AND ESPECIALY 'CreatedAt' COLUMN. \
 DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES.\""
         # Set Custom Prompt to checking Migration files
