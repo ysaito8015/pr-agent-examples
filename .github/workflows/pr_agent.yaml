@@ -32,11 +32,11 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
           COMMAND: "/ask --config.model='gpt-4o-mini' \
  --response_language='ja_JP' \
- \"YOU HAVE TO WRITE REVIEW RESULT IN JAPANESE. \
+ \"YOU HAVE TO WRITE RESULT IN JAPANESE. \
 YOU HAVE TO CHECK THE MIGRATION FILES IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED THESE TABLES. \
 - Persons \
-IF YOU FIND ANY SQL QUERIES THAT SET THE 'CreatedAt' COLUMN NOT TO MEET THE FUTURE DATETIME than current datetime, PRINT THIS 'CreatedAt が未来の日付に設定されていません' with h1 tag. \
-ELSE IF YOU FIND ANY SQL QUERIES THAT SET THE 'CreatedAt' COLUMN TO MEET THE FUTURE DATETIME than current datetime, PRINT THIS  'PASS: 日付のチェック'. \
+If you find any SQL queries that did not set the 'CreatedAt' column to a future datetime beyond the current datetime, then PRINT THIS 'CreatedAt が未来の日付に設定されていません' with h1 tag. \
+Else, if you find any SQL queries that set the 'CreatedAt' column to a future datetime beyond the current one, PRINT THIS  'PASS: 日付のチェック'. \
 YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES AND ESPECIALY 'CreatedAt' COLUMN. \
 DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES.\""
         # Set Custom Prompt to checking Migration files
