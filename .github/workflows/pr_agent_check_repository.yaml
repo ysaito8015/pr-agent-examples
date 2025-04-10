@@ -21,7 +21,7 @@ jobs:
 
       - name: Filter files
         id: filter_files
-        uses: dorny/paths-filter@3.0.2
+        uses: dorny/paths-filter@v3.0.2
         with:
           filters: |
             migrations:
