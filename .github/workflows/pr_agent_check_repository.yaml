@@ -1,0 +1,56 @@
+name: pr-agent
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+    paths:
+      - 'db/migrations/*.sql'
+  issue_comment:
+
+permissions:
+  pull-requests: write
+  issues: write
+
+jobs:
+  pr_agent_job:
+    name: Run pr-agent docker image on PR with migration files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Filter files
+        id: filter_files
+        uses: dorny/paths-filter@3.0.2
+          with:
+            filters: |
+              migrations:
+                - 'db/migrations/*.sql'
+              repositories:
+                - 'handler/*repository*.rb'
+
+      - name: Run pr-agent with custom prompt
+        id: pr-agent-python
+        if: steps.filter_files.outputs.migrations.changed && steps.filter_files.outputs.repositories.changed
+        uses: actions/setup-python@v5 
+        with:
+          python-version: '3.13'
+        env:
+          OPENAI_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          COMMAND: "/ask --config.model='gpt-4o-mini' \
+ --response_language='ja_JP' \
+ \"YOU HAVE TO WRITE RESULT IN JAPANESE. \
+YOU HAVE TO CHECK THE MIGRATION FILES AND THE REPOSITORY FILE IN THIS PR, ESPECIALLY SQL QUERIES CONTAIONED DROP TABLE STATEMENT. \
+If you find any DROP TABLE STATEMENT and at the same time THE TABLE IS USED IN REPOSITORY, then PRINT THIS 'FAIL: DROP TABLE と REPOSITORY のチェック' with h1 tag. \
+If you find any DROP TABLE STATEMENT and at the same time THE TABLE IS NOT USED IN REPOSITORY, then PRINT THIS 'PASS: DROP TABLE と REPOSITORY のチェック' with h1 tag. \
+YOU SHOULD NOT READ THE WHOLE FILES, JUST FOCUS ON THE SQL QUERIES. \
+DO NOT WAISTE YOUR TOKENS TO READ THE WHOLE FILES.\""
+        # Set Custom Prompt to checking Migration files
+        run: |
+          echo "Running pr-agent with custom prompt..."
+          pip install pr-agent
+          python3 bin/pr-agent.py
+
+
