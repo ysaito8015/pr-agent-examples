@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   pr_agent_job:
-    name: Run pr-agent docker image on PR with migration files
+    name: Run pr-agent script on PR with migration files
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
