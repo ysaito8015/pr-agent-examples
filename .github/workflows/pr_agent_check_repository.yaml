@@ -36,7 +36,7 @@ jobs:
 
       - name: Run pr-agent with custom prompt
         id: pr-agent-python
-        if: steps.filter_files.outputs.migrations.changed && steps.filter_files.outputs.repositories.changed
+        if: steps.filter_files.outputs.migrations == 'true'  && steps.filter_files.outputs.repositories == 'true'
         env:
           OPENAI_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
