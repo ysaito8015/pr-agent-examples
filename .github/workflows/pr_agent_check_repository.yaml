@@ -22,12 +22,12 @@ jobs:
       - name: Filter files
         id: filter_files
         uses: dorny/paths-filter@3.0.2
-          with:
-            filters: |
-              migrations:
-                - 'db/migrations/*.sql'
-              repositories:
-                - 'handler/*repository*.rb'
+        with:
+          filters: |
+            migrations:
+              - 'db/migrations/*.sql'
+            repositories:
+              - 'handler/*repository*.rb'
 
       - name: Run pr-agent with custom prompt
         id: pr-agent-python
